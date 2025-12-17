@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 dotenv.config();
-import { users } from "../models/user.js";
+import { users } from "../models/users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -19,6 +19,7 @@ export const signup = async (req, res) => {
         id: users.length + 1,
         email,
         password: hashed,
+        role: "user",
     };
 
     users.push(newUser);
@@ -39,7 +40,7 @@ export const login = async (req, res) => {
 
     // create jwt
     const token = jwt.sign(
-        { id: user.id, email: user.email },
+        { id: user.id, email: user.email, role: user.role },
         process.env.JWT_SECRET,
         {
             expiresIn: "7d",

@@ -1,4 +1,4 @@
-import { users } from "../models/user.js";
+import { users } from "../models/users.js";
 
 export const getUsers = (req, res) => {
     res.json(users);
