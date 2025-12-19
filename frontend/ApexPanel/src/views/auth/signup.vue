@@ -18,10 +18,11 @@ const handleSignup = async () => {
 
     if (data) {
       showToast('signup success', 'success')
-      router.push('/')
+      console.log(data)
+      router.push('/auth/login')
     }
   } catch (error) {
-    showToast(`${error.message}`, 'failed')
+    showToast(`${error.response.data.message}`, 'failed')
   } finally {
     signingUp.value = false
   }

@@ -30,9 +30,19 @@ export const useUserStore = defineStore('user', () => {
     try {
       const data = await login(email, password)
 
-      if (data.user) setUser(data.user)
-      userToken.value = localStorage.setItem('authToken', data.token)
-      userRole.value = data.user.role
+      const decoded = jwtDecode(data.token)
+
+      if (decoded) {
+        user.value = {
+          id: decoded.id,
+          email: decoded.email,
+          role: decoded.role,
+        }
+      }
+
+      localStorage.setItem('authToken', data.token)
+      userToken.value = localStorage.getItem('authToken', data.token)
+      userRole.value = user.value.role
 
       return data
     } catch (error) {
