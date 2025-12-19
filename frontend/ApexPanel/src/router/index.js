@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import DefaultLayout from '../layouts/DefaultLayout.vue'
 import AuthLayout from '../layouts/AuthLayout.vue'
-import { useUserStore } from '../store/user.js'
+import { useUserStore } from '../stores/user.js'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,7 +14,6 @@ const router = createRouter({
           path: '',
           name: 'dashboard',
           component: () => import('../views/dashboard.vue'),
-          meta: { requireAuth: true },
         },
         {
           path: 'products',
@@ -37,12 +36,12 @@ const router = createRouter({
         {
           path: 'signup',
           name: 'signup',
-          component: () => import('../../views/auth/signup.vue'),
+          component: () => import('../views/auth/signup.vue'),
         },
         {
           path: 'login',
           name: 'login',
-          component: () => import('../../views/auth/login.vue'),
+          component: () => import('../views/auth/login.vue'),
         },
       ],
     },

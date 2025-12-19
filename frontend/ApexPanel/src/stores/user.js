@@ -1,8 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { login, signup } from './api/authServices.js'
+import { login, signup } from '@/api/authServices.js'
 import { useRouter } from 'vue-router'
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 
 export const useUserStore = defineStore('user', () => {
   const user = ref({})
@@ -10,7 +10,6 @@ export const useUserStore = defineStore('user', () => {
   const userRole = ref('')
   const isAuthenticated = computed(() => userToken.value !== '')
 
-  // Optional: set user info if backend returns it
   const setUser = (userData) => {
     user.value = userData
   }
@@ -31,9 +30,8 @@ export const useUserStore = defineStore('user', () => {
     try {
       const data = await login(email, password)
 
-      // Optional: store user info if returned by backend
       if (data.user) setUser(data.user)
-      userToken.value = localStorage.SetItem('authToken', data.token)
+      userToken.value = localStorage.setItem('authToken', data.token)
       userRole.value = data.user.role
 
       return data
@@ -48,7 +46,7 @@ export const useUserStore = defineStore('user', () => {
     userToken.value = ''
     user.value = {}
     localStorage.removeItem('authToken')
-    router.push('/login')
+    router.push('/auth/login')
   }
 
   const hydrateAuth = () => {
