@@ -16,15 +16,12 @@ app.use(express.json());
 app.use(cors());
 
 // regular routes
-app.use("/api", (req, res, next) => {
-    routes.forEach((route) => {
-        if (route.protected) {
-            app[route.method](route.path, requireAuth, route.handler);
-        } else {
-            app[route.method](route.path, route.handler);
-        }
-    });
-    next();
+routes.forEach((route) => {
+    if (route.protected) {
+        app[route.method](`/api${route.path}`, requireAuth, route.handler);
+    } else {
+        app[route.method](`/api${route.path}`, route.handler);
+    }
 });
 
 // users routes
@@ -42,7 +39,7 @@ userRoutes.forEach((route) => {
 });
 
 // auth routes
-app.use("/auth", authRouter);
+app.use("/api/auth", authRouter);
 
 const seedAdmin = async () => {
     const adminExists = users.some((u) => u.role === "admin");

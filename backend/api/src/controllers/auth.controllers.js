@@ -24,7 +24,11 @@ export const signup = async (req, res) => {
 
     users.push(newUser);
 
-    res.status(201).json({ id: newUser.id, email: newUser.email });
+    res.status(201).json({
+        id: newUser.id,
+        email: newUser.email,
+        role: newUser.role,
+    });
 };
 
 // LOGIN
@@ -32,13 +36,12 @@ export const login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = users.find((u) => u.email === email);
-    if (!user) return res.status(400).json({ message: "Invalid credentials" });
+    if (!user) return res.status(400).json({ message: "User doesn't exists" });
 
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch)
         return res.status(400).json({ message: "Invalid credentials" });
 
-    // create jwt
     const token = jwt.sign(
         { id: user.id, email: user.email, role: user.role },
         process.env.JWT_SECRET,
