@@ -7,7 +7,7 @@ import { features } from '@/data/features'
   <div class="min-h-screen w-full col-center pt-36">
     <div class="flex flex-col items-center pb-6 px-3">
       <div
-        class="px-4 py-2 bg-neutral-200/80 rounded-full mb-6 flex items-center gap-1 text-neutral-700 text-sm font-medium"
+        class="px-4 py-2 bg-neutral-200/80 rounded-full border border-neutral-300 mb-6 flex items-center gap-1 text-neutral-700 text-sm font-medium"
       >
         <span
           ><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
@@ -79,20 +79,45 @@ import { features } from '@/data/features'
         </p>
       </div>
     </div>
+    <div class="mt-16 w-full mx-auto px-3">
+      <div class="relative">
+        <div
+          class="absolute inset-0 bg-linear-to-r from-neutral-200 to-neutral-300 blur-3xl opacity-30 rounded-3xl"
+        ></div>
+        <div class="relative bg-neutral-100 rounded-2xl shadow-2xl p-6 border border-neutral-200">
+          <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="h-12 bg-neutral-800 flex items-center px-4 space-x-2">
+              <div class="w-3 h-3 rounded-full bg-red-400"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+              <div class="w-3 h-3 rounded-full bg-green-400"></div>
+            </div>
+            <div class="p-8 space-y-4">
+              <div class="flex space-x-4">
+                <div class="w-1/4 h-32 bg-neutral-200 rounded-lg animate-pulse"></div>
+                <div class="w-1/4 h-32 bg-neutral-200 rounded-lg animate-pulse delay-75"></div>
+                <div class="w-1/4 h-32 bg-neutral-200 rounded-lg animate-pulse delay-150"></div>
+                <div class="w-1/4 h-32 bg-neutral-200 rounded-lg animate-pulse delay-200"></div>
+              </div>
+              <div class="h-72 bg-neutral-200 rounded-lg animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <section
-      class="min-h-screen w-full flex flex-col items-center bg-neutral-100 text-center pt-16 sm:px-6 px-3"
+      class="min-h-screen w-full flex flex-col items-center bg-neutral-100 text-center pt-16 sm:px-6 px-3 pb-16"
     >
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
           Everything You Need to Manage
         </h2>
-        <p class="text-xl text-neutral-600 max-w-2xl mx-auto">
+        <p class="text-sm sm:text-xl text-neutral-500 max-w-2xl mx-auto">
           Powerful features designed for modern teams who need control, security, and efficiency
         </p>
       </div>
       <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
         <div
-          class="w-full flex flex-col justify-evenly bg-white border border-neutral-100 p-8 text-start space-y-5 rounded-2xl shadow-xs hover:-translate-y-2 hover"
+          class="w-full flex flex-col justify-evenly bg-white border border-neutral-100 p-8 text-start space-y-5 rounded-2xl shadow-sm transition-all duration-300 ease-out hover:-translate-y-2 hover:shadow-lg"
           v-for="(feature, index) in features"
           :key="index"
         >
@@ -104,13 +129,13 @@ import { features } from '@/data/features'
         </div>
       </div>
     </section>
-    <section class="w-full center bg-black text-center py-16 px-6">
-      <div class="text-center space-y-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-neutral-100 mb-8">
-          Everything You Need to Manage
+    <section class="w-full center bg-black text-center py-12 sm:py-16 px-6">
+      <div class="text-center space-y-10 sm:space-y-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-neutral-100 mb-4 sm:mb-8">
+          Ready to Take Control?
         </h2>
-        <p class="text-xl text-neutral-100 max-w-2xl mx-auto">
-          Powerful features designed for modern teams who need control, security, and efficiency
+        <p class="sm:text-xl text-neutral-100 max-w-2xl mx-auto">
+          Join teams who trust ApexPanel for their admin dashboard needs
         </p>
         <div class="w-full flex justify-center">
           <button
@@ -135,3 +160,20 @@ import { features } from '@/data/features'
     </section>
   </div>
 </template>
+
+<style scoped>
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s ease-out both;
+}
+</style>

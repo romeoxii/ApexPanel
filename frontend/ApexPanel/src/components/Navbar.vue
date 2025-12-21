@@ -1,8 +1,11 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
+import { useUserStore } from '@/stores/user'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const scrolled = ref(false)
+
+const userStore = useUserStore()
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 20
@@ -21,7 +24,7 @@ onUnmounted(() => {
   <nav
     :class="`min-h-14 center p-2 fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-md' : 'bg-transparent'}`"
   >
-    <div class="flex w-full sm:w-[80%] items-center justify-between">
+    <div class="flex w-full items-center justify-evenly">
       <h1 class="flex items-center text-xl font-bold gap-1 text-neutral-800">
         <span
           ><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -37,8 +40,24 @@ onUnmounted(() => {
         ></span>
         ApexPanel
       </h1>
-      <div class="w-1/2 h-full">
-        <ul class="w-full flex items-center justify-end gap-5">
+      <div class="h-full">
+        <ul class="flex items-center justify-end gap-5">
+          <li>
+            <RouterLink to="/" class="main-nav">Home</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/about" class="main-nav">About</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/features" class="main-nav">Features</RouterLink>
+          </li>
+          <li>
+            <RouterLink to="/pricing" class="main-nav">Pricing</RouterLink>
+          </li>
+        </ul>
+      </div>
+      <div class="h-full" v-if="!userStore.isAuthenticated">
+        <ul class="flex items-center justify-end gap-5">
           <li
             class="px-2 py-1 bg-neutral-800/95 text-white hover:bg-neutral-700 rounded-md text-sm hover"
           >
@@ -49,6 +68,16 @@ onUnmounted(() => {
           >
             <RouterLink to="/auth/signup">Get started</RouterLink>
           </li>
+        </ul>
+      </div>
+      <div class="h-full" v-else>
+        <ul class="w-full flex items-center justify-end gap-5">
+          <button
+            class="transition-transform transform hover:scale-102 px-2 py-1 text-neutral-800 bg-neutral-50 hover:bg-neutral-100 rounded-md text-sm hover border-2 border-neutral-800"
+            @click="userStore.logoutUser"
+          >
+            Logout
+          </button>
         </ul>
       </div>
     </div>

@@ -11,3 +11,11 @@
 .hover {
   transition: all 0.3s ease-in-out 0.1s;
 }
+
+.main-nav {
+  @apply px-2 py-1 text-neutral-800  hover:border-b-2 hover:border-neutral-800 text-sm;
+}
+
+.main-nav.router-link-exact-active {
+  @apply px-2 py-1 text-neutral-800  border-b-2 border-neutral-800 text-sm;
+}

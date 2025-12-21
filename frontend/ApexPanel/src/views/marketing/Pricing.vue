@@ -1,0 +1,188 @@
+<!-- eslint-disable vue/multi-word-component-names -->
+<script setup>
+import { ref } from 'vue'
+import { plans } from '@/data/plans'
+
+const billingCycle = ref('monthly')
+const setBillingCycle = (newCycle) => {
+  billingCycle.value = newCycle
+}
+
+const getPrice = (plan) => {
+  if (plan.price.monthly === 0) return 'Free'
+  const price = billingCycle.value === 'monthly' ? plan.price.monthly : plan.price.yearly
+  return `$${price}`
+}
+
+const getSavings = (plan) => {
+  if (plan.price.monthly === 0) return null
+  const monthlyCost = plan.price.monthly * 12
+  const savings = monthlyCost - plan.price.yearly
+  return savings > 0 ? `Save $${savings}` : null
+}
+</script>
+<template>
+  <div class="min-h-screen">
+    <div class="pt-40 pb-12 px-4 sm:px-6 lg:px-8 text-center col-center">
+      <div
+        class="inline-flex items-center space-x-2 px-4 py-2 bg-white border border-neutral-200 rounded-full mb-6"
+      >
+        <p class="center gap-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
+            <path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M5 20.5h14m-2.128-3H7.128c-1.028 0-1.542 0-1.932-.277c-.39-.276-.56-.761-.9-1.732L2.052 9.077a.97.97 0 0 1 .241-1.007a1.01 1.01 0 0 1 1.26-.123l1.231.81c1.244.818 1.866 1.226 2.495 1.078c.629-.149 1.002-.793 1.749-2.08l2.214-3.82A.88.88 0 0 1 12 3.5c.314 0 .603.166.759.434l2.214 3.82c.747 1.288 1.12 1.932 1.749 2.08c.629.15 1.25-.26 2.494-1.077l1.233-.81a1.01 1.01 0 0 1 1.259.123c.267.264.36.653.24 1.007l-2.245 6.414c-.34.97-.51 1.456-.9 1.732c-.39.277-.903.277-1.931.277"
+            /></svg
+          ><span class="text-sm font-medium text-neutral-700">Simple, Transparent Pricing</span>
+        </p>
+      </div>
+      <div class="text-center">
+        <h1 class="text-5xl md:text-6xl font-bold text-neutral-800 mb-6">Choose Your Plan</h1>
+
+        <p class="text-xl text-neutral-600 mb-8 max-w-2xl mx-auto">
+          Start free, scale as you grow. All plans include core features with no hidden fees.
+        </p>
+      </div>
+      <div
+        class="inline-flex items-center space-x-3 bg-white rounded-lg p-1 border border-neutral-200"
+      >
+        <button
+          @click="setBillingCycle('monthly')"
+          :class="[
+            billingCycle === 'monthly'
+              ? 'bg-neutral-800 text-white'
+              : 'text-neutral-600 hover:text-neutral-800',
+          ]"
+          class="px-6 py-2 rounded-md font-medium transition-all hover"
+        >
+          Monthly
+        </button>
+
+        <button
+          @click="setBillingCycle('yearly')"
+          :class="[
+            billingCycle === 'yearly'
+              ? 'bg-neutral-800 text-white'
+              : 'text-neutral-600 hover:text-neutral-800',
+          ]"
+          class="px-6 py-2 rounded-md font-medium transition-all hover"
+        >
+          Yearly
+        </button>
+      </div>
+      <p
+        v-if="billingCycle === 'yearly'"
+        class="flex items-center gap-1 mt-3 text-xs text-green-600 font-medium"
+      >
+        <span
+          ><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.5">
+              <path
+                d="M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10q-.002-1.03-.2-2"
+              />
+              <path stroke-linejoin="round" d="M8 12.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11" />
+            </g></svg></span
+        >Save up to 20% with annual billing
+      </p>
+      <section class="py-12 px-4 sm:px-6 lg:px-8 w-full center">
+        <div class="mx-auto w-full">
+          <div class="w-full grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8">
+            <div
+              v-for="(plan, index) in plans"
+              :key="index"
+              class="relative w-full"
+              :class="[
+                plan.popular
+                  ? 'border-2 border-neutral-900 scale-102 rounded-lg'
+                  : 'border border-neutral-300 rounded-lg',
+              ]"
+            >
+              <p
+                class="absolute -top-4 left-[35%] text-neutral-50 text-sm bg-neutral-900 rounded-full py-1 px-3"
+                v-if="plan.popular"
+              >
+                Most Popular
+              </p>
+              <div class="text-start p-4">
+                <div class="mb-6">
+                  <div class="w-12 h-12 bg-neutral-900 rounded-xl center mb-4">
+                    <div class="w-6 h-6 text-white center" v-html="plan.icon"></div>
+                  </div>
+                  <h3 class="text-2xl font-bold text-neutral-900 mb-2">{{ plan.name }}</h3>
+                  <p class="text-neutral-600 text-sm">{{ plan.description }}</p>
+                </div>
+                <div class="mb-6">
+                  <div class="flex items-baseline">
+                    <span class="text-5xl font-bold text-neutral-900">{{ getPrice(plan) }}</span>
+                    <span v-if="plan.price.monthly > 0" class="text-neutral-600 ml-1">
+                      /{{ billingCycle === 'monthly' ? 'mo' : 'yr' }}
+                    </span>
+                  </div>
+                  <p
+                    v-if="billingCycle === 'yearly' && getSavings(plan)"
+                    class="text-sm text-green-600 font-medium mt-1"
+                  >
+                    {{ getSavings(plan) }}/year
+                  </p>
+                </div>
+                <button
+                  :class="[
+                    'w-full py-3 rounded-lg font-semibold mb-6 transition-all',
+                    plan.popular
+                      ? 'bg-neutral-900 text-white hover:bg-neutral-700 hover'
+                      : 'hover border border-neutral-300 bg-neutral-200 text-neutral-900 hover:bg-neutral-100 hover:text-neutral-800',
+                  ]"
+                >
+                  {{ plan.cta }}
+                </button>
+                <div
+                  v-for="(feature, fIndex) in plan.features"
+                  :key="fIndex"
+                  class="flex items-start space-x-3 space-y-3"
+                >
+                  <svg
+                    v-if="feature.included"
+                    class="w-5 h-5 text-neutral-900 shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7"
+                    ></path>
+                  </svg>
+                  <svg
+                    v-else
+                    class="w-5 h-5 text-neutral-400 shrink-0 mt-0.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  <span :class="feature.included ? 'text-neutral-700' : 'text-neutral-400'">
+                    {{ feature.text }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</template>
+
+<style></style>

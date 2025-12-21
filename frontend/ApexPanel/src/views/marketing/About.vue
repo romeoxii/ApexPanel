@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>
-    <h1>This is the products page</h1>
+  <div class="center min-h-screen">
+    <h1>This is the about page</h1>
   </div>
 </template>
 

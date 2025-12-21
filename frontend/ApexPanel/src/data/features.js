@@ -9,7 +9,7 @@ export const features = [
     </g>
   </svg>`,
     title: 'User Management',
-    description: 'Comprehensive user control with role-based permissions and access levels',
+    description: 'Comprehensive user control with role-based permissions and access levels.',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -21,7 +21,7 @@ export const features = [
     </g>
   </svg>`,
     title: 'Product Dashboard',
-    description: 'Centralized product management with real-time updates and analytics',
+    description: 'Centralized product management with real-time updates and analytics.',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -33,7 +33,7 @@ export const features = [
     </g>
   </svg>`,
     title: 'Secure Authentication',
-    description: 'Industry-standard security protocols with encrypted data transmission',
+    description: 'Industry-standard security protocols with encrypted data transmission.',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -47,14 +47,14 @@ export const features = [
       />
     </g></svg>`,
     title: 'Role-Based Access',
-    description: 'Granular permission controls ensuring users access only what they need',
+    description: 'Granular permission controls ensuring users access only what they need.',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="1.5" d="M8.628 12.674H8.17c-1.484 0-2.225 0-2.542-.49c-.316-.489-.015-1.17.588-2.533l1.812-4.098c.548-1.239.822-1.859 1.353-2.206S10.586 3 11.935 3h2.09c1.638 0 2.458 0 2.767.535c.309.536-.098 1.25-.91 2.681l-1.073 1.886c-.404.711-.606 1.066-.603 1.358c.003.378.205.726.53.917c.25.147.657.147 1.471.147c1.03 0 1.545 0 1.813.178c.349.232.531.646.467 1.061c-.049.32-.395.703-1.088 1.469l-5.535 6.12c-1.087 1.203-1.63 1.804-1.996 1.613c-.365-.19-.19-.983.16-2.569l.688-3.106c.267-1.208.4-1.812.08-2.214c-.322-.402-.937-.402-2.168-.402Z" />
   </svg>`,
     title: 'Real-Time Updates',
-    description: 'Instant synchronization across all dashboard components',
+    description: 'Instant synchronization across all dashboard components.',
   },
   {
     icon: `<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24">
@@ -65,6 +65,6 @@ export const features = [
       <path stroke-linejoin="round" d="M8 12.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11" />
     </g></svg>`,
     title: 'Audit Logging',
-    description: 'Complete activity tracking for compliance and security monitoring',
+    description: 'Complete activity tracking for compliance and security monitoring.',
   },
 ]

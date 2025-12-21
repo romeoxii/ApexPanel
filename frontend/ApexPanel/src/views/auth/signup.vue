@@ -65,7 +65,7 @@ const handleSignup = async () => {
       </div>
       <button
         type="submit"
-        class="w-full p-2 bg-neutral-200 hover:bg-neutral-100 border border-neutral-300 rounded-md text-neutral-700"
+        class="w-full p-2 bg-neutral-200 hover:bg-neutral-100 border border-neutral-300 rounded-md text-neutral-700 hover"
         :disabled="signingUp"
       >
         {{ signingUp ? 'Signing up...' : 'Create account' }}

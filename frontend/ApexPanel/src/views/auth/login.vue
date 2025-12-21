@@ -18,6 +18,7 @@ const handleLogin = async () => {
 
     if (data) {
       showToast('login success', 'success')
+      console.log(data)
       router.push('/')
     }
   } catch (error) {
@@ -64,7 +65,7 @@ const handleLogin = async () => {
       </div>
       <button
         type="submit"
-        class="w-full p-2 bg-neutral-200 hover:bg-neutral-100 border border-neutral-300 rounded-md text-neutral-700"
+        class="w-full p-2 bg-neutral-200 hover:bg-neutral-100 border border-neutral-300 rounded-md text-neutral-700 hover"
         :disabled="logginIn"
       >
         {{ logginIn ? 'Signing in' : 'Sign in' }}
