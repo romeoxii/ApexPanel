@@ -2,6 +2,7 @@
 <script setup>
 import { ref } from 'vue'
 import { plans } from '@/data/plans'
+import faqs from '@/data/faqs'
 
 const billingCycle = ref('monthly')
 const setBillingCycle = (newCycle) => {
@@ -20,10 +21,16 @@ const getSavings = (plan) => {
 	const savings = monthlyCost - plan.price.yearly
 	return savings > 0 ? `Save $${savings}` : null
 }
+
+const faqShown = ref({})
+
+const showFaq = (faq) => {
+	faqShown.value[faq] = true
+}
 </script>
 <template>
 	<div class="min-h-screen">
-		<div class="pt-40 pb-12 px-4 sm:px-6 lg:px-8 text-center col-center">
+		<div class="pt-40 pb-12 text-center col-center">
 			<div
 				class="inline-flex items-center space-x-2 px-4 py-2 bg-white border border-neutral-200 rounded-full mb-6"
 			>
@@ -111,7 +118,7 @@ const getSavings = (plan) => {
 						</g></svg></span
 				>Save up to 20% with annual billing
 			</p>
-			<section class="py-12 px-4 sm:px-6 lg:px-8 w-full center">
+			<section class="py-12 px-8 sm:px-12 lg:px-16 w-full center">
 				<div class="mx-auto w-full">
 					<div class="w-full grid sm:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8">
 						<div
@@ -217,6 +224,119 @@ const getSavings = (plan) => {
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+			</section>
+			<section class="pt-12 px-4 sm:px-6 lg:px-8 w-full bg-white">
+				<div class="w-full mx-auto mb-12">
+					<h3 class="text-4xl font-medium text-neutral-800 mb-3">Compare All Features</h3>
+					<p class="text-lg text-neutral-700">See whats included in each plan</p>
+				</div>
+				<div class="overflow-x-auto">
+					<table class="w-full">
+						<thead class="bg-neutral-50">
+							<tr>
+								<th class="text-center py-4 px-6 text-neutral-900 font-semibold">
+									Feature
+								</th>
+								<th class="text-center py-4 px-6 text-neutral-900 font-semibold">
+									Starter
+								</th>
+								<th class="text-center py-4 px-6 text-neutral-900 font-semibold">
+									Professional
+								</th>
+								<th class="text-center py-4 px-6 text-neutral-900 font-semibold">
+									Enterprise
+								</th>
+							</tr>
+						</thead>
+						<tbody class="divide-y divide-neutral-200">
+							<tr
+								v-for="(feature, fIdx) in plans[0].features"
+								:key="fIdx"
+								class="hover:bg-neutral-50"
+							>
+								<td class="py-4 px-6 text-neutral-700">
+									{{ plans[0].features[fIdx].text }}
+								</td>
+								<td
+									v-for="(plan, pIdx) in plans"
+									:key="pIdx"
+									class="py-4 px-6 text-center"
+								>
+									<svg
+										v-if="plan.features[fIdx].included"
+										class="w-5 h-5 text-neutral-900 mx-auto"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M5 13l4 4L19 7"
+										></path>
+									</svg>
+									<svg
+										v-else
+										class="w-5 h-5 text-neutral-300 mx-auto"
+										fill="none"
+										stroke="currentColor"
+										viewBox="0 0 24 24"
+									>
+										<path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M6 18L18 6M6 6l12 12"
+										></path>
+									</svg>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+			<section class="py-20 px-4 sm:px-6 lg:px-8 bg-neutral-50 w-full">
+				<div class="max-w-7xl mx-auto">
+					<div class="mb-12">
+						<h3 class="text-4xl font-bold text-neutral-800 mb-3">
+							Frequently Asked Questions
+						</h3>
+						<p class="text-lg text-neutral-600">
+							Everything you need to know about our pricing
+						</p>
+					</div>
+					<div
+						class="w-4xl divide-y divide-neutral-400 border p-2 mx-auto"
+						v-for="(faq, index) in faqs"
+						:key="index"
+					>
+						<div class="flex items-center justify-between gap-2">
+							<div class="flex items-center gap-2">
+								<span v-html="faq.icon"></span>
+								<h3>{{ faq.question }}</h3>
+							</div>
+							<button @click="showFaq(faq)" class="cursor-pointer">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+								>
+									<path
+										fill="none"
+										stroke="currentColor"
+										stroke-linecap="round"
+										stroke-linejoin="round"
+										stroke-width="1.5"
+										d="M18 9s-4.419 6-6 6s-6-6-6-6"
+									/>
+								</svg>
+							</button>
+						</div>
+						<p class="w-full" v-if="faqShown[faq]">{{ faq.answer }}</p>
 					</div>
 				</div>
 			</section>
