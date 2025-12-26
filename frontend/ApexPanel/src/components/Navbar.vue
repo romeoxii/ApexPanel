@@ -87,7 +87,7 @@ onUnmounted(() => {
 					</button>
 				</ul>
 			</div>
-			<!-- Replace the hamburger button section with this -->
+
 			<button
 				class="p-2 border border-neutral-200 bg-neutral-100 rounded-md inline-flex md:hidden"
 				@click="openNav"
