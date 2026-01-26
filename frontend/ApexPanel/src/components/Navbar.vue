@@ -26,7 +26,7 @@ onUnmounted(() => {
 	<nav
 		:class="`min-h-14 center p-2 fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-md' : 'bg-transparent'}`"
 	>
-		<div class="flex w-full items-center justify-between sm:justify-evenly px-3 sm:px-0">
+		<div class="flex w-full items-center justify-between px-3 sm:px-5">
 			<h1 class="flex items-center text-xl font-bold gap-1 text-neutral-800">
 				<span
 					><svg

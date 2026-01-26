@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup>
 import { mainFeatures } from '@/data/mainFeatures'
+import { additionalFeatures } from '@/data/additionalFeatures'
 import Point from '../../../public/Icons/point.vue'
 </script>
 
@@ -59,7 +60,7 @@ import Point from '../../../public/Icons/point.vue'
 				></span>
 			</RouterLink>
 		</div>
-		<section class="bg-white w-full py-20 col-center">
+		<section class="bg-white w-full py-16 col-center">
 			<div class="text-center w-full mb-5">
 				<h2 class="text-5xl font-bold text-neutral-800 mb-4">Core Features</h2>
 				<p class="text-xl text-neutral-600 mb-4">
@@ -81,13 +82,55 @@ import Point from '../../../public/Icons/point.vue'
 						<div class="space-y-3">
 							<p
 								class="flex items-center gap-2 text-neutral-600"
-								v-for="(_, _index) in feature.features"
-								:key="_index"
+								v-for="(p, pindex) in feature.features"
+								:key="pindex"
 							>
-								<Point />{{ _ }}
+								<Point />{{ p }}
 							</p>
 						</div>
 					</div>
+				</div>
+			</div>
+		</section>
+		<section class="w-full col-center py-16 px-4 col-center">
+			<div class="text-center w-full mb-5">
+				<h2 class="text-5xl font-bold text-neutral-800 mb-4">And Much More</h2>
+				<p class="text-xl text-neutral-600 mb-4">
+					Additional features to enhance your workflow.
+				</p>
+			</div>
+			<div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div
+					class="bg-white p-6 rounded-xl border border-neutral-200 hover:shadow-lg transition-shadow flex items-center space-x-4"
+					v-for="(adFeats, adFeatsIndex) in additionalFeatures"
+					:key="adFeatsIndex"
+				>
+					<div class="w-12 h-12 bg-neutral-900 center p-5 rounded-lg">
+						<span v-html="adFeats.icon" class="text-white"></span>
+					</div>
+					<span class="font-semibold text-neutral-900">{{ adFeats.text }}</span>
+				</div>
+			</div>
+		</section>
+		<section class="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+			<div class="max-w-4xl mx-auto text-center">
+				<h2 class="text-4xl md:text-5xl font-bold text-neutral-900 mb-6">
+					Ready to Experience These Features?
+				</h2>
+				<p class="text-xl text-neutral-600 mb-8">
+					Start your free trial today and see how ApexPanel can transform your operations
+				</p>
+				<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+					<button
+						class="px-8 py-4 bg-neutral-900 text-white rounded-lg hover:bg-neutral-700 transition-all font-semibold shadow-lg"
+					>
+						Start Free Trial
+					</button>
+					<button
+						class="px-8 py-4 border-2 border-neutral-900 text-neutral-900 rounded-lg hover:bg-neutral-50 transition-all font-semibold"
+					>
+						Schedule Demo
+					</button>
 				</div>
 			</div>
 		</section>

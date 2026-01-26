@@ -6,5 +6,5 @@ import Footer from '@/components/Footer.vue'
 </script>
 
 <template>
-  <div class="min-h-screen w-full bg-neutral-50"><Navbar /><RouterView /><Footer /></div>
+	<div class="min-h-screen w-full bg-neutral-50"><Navbar /><RouterView /><Footer /></div>
 </template>
